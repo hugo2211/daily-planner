@@ -22,44 +22,59 @@
   </header>
   <div class="container">
     <!-- Timeblocks go here -->
-    <div class="row">
-      <div class="col-2 hour">
-
-      </div>
-      <div class="col-9 input-text">
-        <input class="form-control" type="text" placeholder="Default input">
-        <h2></h2>
-      </div>
-      <div class="col-1 save-button">
-        <button class="fas fa-save"></button>
-      </div>
-    </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script>
-    var date = moment().format('LLLL');
-    var hour = $(".hour");
-    var input = $(".input-text");
-    var save = $(".save-button");
-    var hours = ["6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM", "12AM"];
+    var currentDate = moment().format('LLLL');
+    var hours = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM",];
 
 
-    $("#currentDay").text(date)
-    console.log(date);
+    $("#currentDay").text(currentDate)
+    console.log(currentDate);
 
-    function renderHours() {
+    function renderRows() {
 
-      // Render a new h2 for each hours
+      // Render rows including: hour, text area, and save button.
       for (var i = 0; i < hours.length; i++) {
+        var timeClass = updateTime(hours[i]);
         var dailyHour = hours[i];
+        var row = $("<div>").addClass("row");
+        var h3 = $("<h3>").addClass("col-md-2 hour time-block").text(dailyHour);
+        var text = $("<textarea>").addClass(`col-md-9 discription ${timeClass}`);
+        var saveBtn = $("<button>").addClass("col-md-1 saveBtn fas fa-save");
 
-        var h2 = $("<h2>").text(dailyHour);
-        $(hour).append(h2);
+        $(".container").append(row);
+        row.append(h3, text, saveBtn);
       }
     }
-    renderHours();
-    console.log(renderHours);
+    renderRows();
+    console.log(renderRows);
+
+    function updateTime(currentHour) {
+      var currentTime = moment().format("H");
+      //making sure time matches military time
+      var parseCurrentHour;
+
+      if (currentHour !== "12PM" && currentHour.includes("PM")) {
+        parseCurrentHour = parseInt(currentHour) + 12
+      } else {
+        parseCurrentHour = parseInt(currentHour)
+      }
+
+      console.log(currentTime, parseCurrentHour);
+
+      //Setting the backround color based on time
+      if (parseCurrentHour > currentTime) {
+        return "future"
+      }
+      if (parseCurrentHour < currentTime) {
+        return "past"
+      }
+      if (parseCurrentHour = currentTime) {
+        return "present"
+      }
+    }
 
   </script>
 </body>
