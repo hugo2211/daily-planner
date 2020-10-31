@@ -26,11 +26,11 @@
       <div class="col-2 hour">
 
       </div>
-      <div class="col-8 input-text">
+      <div class="col-9 input-text">
         <input class="form-control" type="text" placeholder="Default input">
-
+        <h2></h2>
       </div>
-      <div class="col-2 save-button">
+      <div class="col-1 save-button">
         <button class="fas fa-save"></button>
       </div>
     </div>
@@ -54,8 +54,7 @@
       for (var i = 0; i < hours.length; i++) {
         var dailyHour = hours[i];
 
-        var h2 = $("<h2>");
-        h2.text = dailyHour;
+        var h2 = $("<h2>").text(dailyHour);
         $(hour).append(h2);
       }
     }
