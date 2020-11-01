@@ -7,7 +7,7 @@ The times in the future the text area will be red.
 
 
 # screenshot
-![Screenshot](
+![Screenshot](https://github.com/hugo2211/daily-planner/blob/master/Screen%20Shot%202020-10-31%20at%2010.07.50%20PM.png?raw=true)
 
 # url of the website
 https://hugo2211.github.io/daily-planner/
