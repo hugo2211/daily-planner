@@ -10,3 +10,4 @@ The times in the future the text area will be red.
 ![Screenshot](
 
 # url of the website
+https://hugo2211.github.io/daily-planner/
