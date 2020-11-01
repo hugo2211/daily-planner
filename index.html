@@ -38,22 +38,24 @@
       // Render rows including: hour, text area, and save button.
       for (var i = 0; i < hours.length; i++) {
         var timeClass = updateTime(hours[i]);
+        var saveClass = renderText(hours[i]);
+
         var dailyHour = hours[i];
         var row = $("<div>").addClass("row");
         var h3 = $("<h3>").addClass("col-md-2 hour time-block").text(dailyHour);
         var text = $("<textarea>").addClass(`col-md-9 discription ${timeClass}`);
-        var saveBtn = $("<button>").addClass("col-md-1 saveBtn fas fa-save");
+        var saveBtn = $("<button>").addClass(`col-md-1 saveBtn fas fa-save ${saveClass}`);
 
         $(".container").append(row);
         row.append(h3, text, saveBtn);
       }
-    }
+    };
     renderRows();
     console.log(renderRows);
 
+    //making sure time matches military time
     function updateTime(currentHour) {
       var currentTime = moment().format("H");
-      //making sure time matches military time
       var parseCurrentHour;
 
       if (currentHour !== "12PM" && currentHour.includes("PM")) {
@@ -75,6 +77,20 @@
         return "present"
       }
     }
+
+    function renderText() {
+      var text = localStorage.getItem("text");
+      $("textarea").text = text;
+
+    }
+    //added save function to store text
+    $(".saveBtn").on("click", function (event) {
+      event.preventDefault();
+      var text = document.querySelector(".col-md-9").value;
+      localStorage.setItem("text", JSON.stringify(text));
+      console.log(text);
+      renderText();
+    });
 
   </script>
 </body>
